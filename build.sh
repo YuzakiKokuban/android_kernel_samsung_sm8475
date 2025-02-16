@@ -1,18 +1,24 @@
+export PATH="/home/kokuban/toolchainZ4/prebuilts/build-tools/linux-x86/bin:/home/kokuban/toolchainZ4/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin:/home/kokuban/toolchainZ4/prebuilts-master/clang/host/linux-x86/clang-r416183b/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:$PATH"
+
+echo $PATH
+
 set -e
 
 TARGET_DEFCONFIG=${1:-taro_gki_defconfig}
 
 cd "$(dirname "$0")"
 
-LOCALVERSION=-Kokuban-android12-8-Bronya
+LOCALVERSION=-Kokuban-android12-9-Bronya
 
 if [ "$LTO" == "thin" ]; then
   LOCALVERSION+="-thin"
 fi
 
 ARGS="
+CROSS_COMPILE=aarch64-linux-gnu-
 CC=clang
 ARCH=arm64
+SUBARCH=arm64
 LLVM=1 LLVM_IAS=1
 LOCALVERSION=$LOCALVERSION
 "
